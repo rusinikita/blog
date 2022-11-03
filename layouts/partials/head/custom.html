@@ -1,0 +1,25 @@
+<script src="https://unpkg.com/pako@1.0.10/dist/pako_deflate.min.js"></script>
+<script type="text/javascript">
+    function encodedKrokiUrlPath(srcText) {
+        if((!srcText || srcText.trim().length == 0)) {
+            srcText = "digraph G { Missing -> srcText }";
+        }
+        let base64Encoded;
+        if (window.TextEncoder) {
+            base64Encoded = new TextEncoder('utf-8').encode(srcText);
+        } else {
+            let utf8 = unescape(encodeURIComponent(srcText));
+            let base64Encoded = new Uint8Array(utf8.length);
+            for (let i = 0; i < utf8.length; i++) {
+                base64Encoded[i] = utf8.charCodeAt(i);
+            }
+        }
+        let compressed = pako.deflate(base64Encoded, { level: 9, to: 'string' });
+        return btoa(compressed).replace(/\+/g, '-').replace(/\//g, '_');
+    }
+
+    function renderKrokiImage(srcText, outputNode) {
+        let krokiURL = "http://kroki.io/c4plantuml/svg/" + encodedKrokiUrlPath(srcText) + "?theme=sandstone"
+        outputNode.innerHTML = "<a href='"+ krokiURL +"'><img src='"+ krokiURL +"'/></a>"
+    }
+</script>

@@ -4,8 +4,8 @@ mainSections = ["post"]
 rssFullContent = true
 
 [footer]
-since = 2020
-customText = ""
+since = 2022
+customText = "Diagrams by Mermaid, C4-PlantUML, Kroki"
 
 [dateFormat]
 published = "Jan 02, 2006"

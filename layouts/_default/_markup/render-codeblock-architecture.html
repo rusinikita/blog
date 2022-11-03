@@ -1,0 +1,13 @@
+{{ $id := int (.Page.Store.Get "archID") }}
+
+<div id="{{$id}}" class="container code">
+Rendering {{ $id }} diagramm...
+</div>
+
+<script>
+    renderKrokiImage("@startuml\n!include C4_Context.puml\n{{ .Inner }}\n@enduml", document.getElementById("{{$id}}"))
+</script>
+
+{{ .Page.Store.Set "archID" (add $id 1) }}
+
+{{ .Page.Store.Set "hasArchitecture" true }}
