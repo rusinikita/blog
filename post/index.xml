@@ -1,0 +1,209 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Posts on Nikita Rusin</title><link>https://rusinikita.github.io/blog/post/</link><description>Recent content in Posts on Nikita Rusin</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><lastBuildDate>Sun, 06 Mar 2022 00:00:00 +0000</lastBuildDate><atom:link href="https://rusinikita.github.io/blog/post/index.xml" rel="self" type="application/rss+xml"/><item><title>Hello World</title><link>https://rusinikita.github.io/blog/p/hello-world/</link><pubDate>Sun, 06 Mar 2022 00:00:00 +0000</pubDate><guid>https://rusinikita.github.io/blog/p/hello-world/</guid><description>&lt;img src="https://rusinikita.github.io/blog/p/hello-world/cover.jpg" alt="Featured image of post Hello World" />&lt;p>Welcome to Hugo theme Stack. This is your first post. Edit or delete it, then start writing!&lt;/p>
+&lt;p>For more information about this theme, check the documentation: &lt;a class="link" href="https://docs.stack.jimmycai.com/" target="_blank" rel="noopener"
+>https://docs.stack.jimmycai.com/&lt;/a>&lt;/p>
+&lt;div class="mermaid code">sequenceDiagram
+participant Alice
+participant Bob
+Alice->>John: Hello John, how are you?
+loop Healthcheck
+John->John: Fight against hypochondria
+end
+Note right of John: Rational thoughts &lt;br/>prevail...
+John-->Alice: Great!
+John->Bob: How about you?
+Bob-->John: Jolly good!
+&lt;/div>
+&lt;p>Want a site like this? Check out &lt;a class="link" href="https://github.com/CaiJimmy/hugo-theme-stack-starter" target="_blank" rel="noopener"
+>hugo-theme-stack-stater&lt;/a>&lt;/p>
+&lt;blockquote>
+&lt;p>Photo by &lt;a class="link" href="https://unsplash.com/@pawel_czerwinski" target="_blank" rel="noopener"
+>Pawel Czerwinski&lt;/a> on &lt;a class="link" href="https://unsplash.com/" target="_blank" rel="noopener"
+>Unsplash&lt;/a>&lt;/p>
+&lt;/blockquote></description></item><item><title>Onboarding management system</title><link>https://rusinikita.github.io/blog/p/onboarding-management/</link><pubDate>Sun, 06 Mar 2022 00:00:00 +0000</pubDate><guid>https://rusinikita.github.io/blog/p/onboarding-management/</guid><description>&lt;img src="https://rusinikita.github.io/blog/p/onboarding-management/retention.png" alt="Featured image of post Onboarding management system" />&lt;h1 id="onboarding-management-system">Onboarding management system&lt;/h1>
+&lt;p>Мы разработаем отдельный сервис позволяющий удаленно, без программирования управлять последовательностью и контентом подсказок в приложении.&lt;/p>
+&lt;p>&lt;img src="https://rusinikita.github.io/blog/blog/p/onboarding-management/slack.png"
+width="915"
+height="322"
+srcset="https://rusinikita.github.io/blog/blog/p/onboarding-management/slack_hu6fcf4d67183389fb1e15b265a33b8694_96699_480x0_resize_box_3.png 480w, https://rusinikita.github.io/blog/blog/p/onboarding-management/slack_hu6fcf4d67183389fb1e15b265a33b8694_96699_1024x0_resize_box_3.png 1024w"
+loading="lazy"
+alt="Подсказка в slack"
+class="gallery-image"
+data-flex-grow="284"
+data-flex-basis="681px"
+> &lt;img src="https://rusinikita.github.io/blog/blog/p/onboarding-management/tiktok.png"
+width="1408"
+height="1222"
+srcset="https://rusinikita.github.io/blog/blog/p/onboarding-management/tiktok_hu33cc455d1a4222063107b4f2dd25f01a_1804333_480x0_resize_box_3.png 480w, https://rusinikita.github.io/blog/blog/p/onboarding-management/tiktok_hu33cc455d1a4222063107b4f2dd25f01a_1804333_1024x0_resize_box_3.png 1024w"
+loading="lazy"
+alt="Подсказка в tiktok"
+class="gallery-image"
+data-flex-grow="115"
+data-flex-basis="276px"
+>&lt;/p>
+&lt;h2 id="проблема">Проблема&lt;/h2>
+&lt;p>Нужно найти идеальный путь погружения пользователя в приложение и расставить подсказки. Чтобы он быстро увидел важную ему ценность сервиса.&lt;/p>
+&lt;p>Путь может быть разным для пользователей с разным контекстом и запросом&lt;/p>
+&lt;div class="mermaid code">flowchart LR
+subgraph Team space newbie
+direction LR
+select_chat-->write_message-->remind_me-->change_status-->create_chat-->mentions
+end
+subgraph Experienced coworker
+direction LR
+multiple_mentions-->delayed_messages-->repeatable_status-->bots-->dashboards
+end
+&lt;/div>
+&lt;h3 id="инструмент">Инструмент&lt;/h3>
+&lt;p>Чтобы найти идеальные пути, нужно много экспериментировать. Релизный цикл сильно растягивает получение обратной связи.&lt;/p>
+&lt;p>Поэтому мы разработаем no code on-boarding систему позволяющую:&lt;/p>
+&lt;ol>
+&lt;li>Быстро менять последовательность шагов обучения пользователя;&lt;/li>
+&lt;li>Выделять сегменты пользователей с разными последовательностями;&lt;/li>
+&lt;li>Ставить эксперименты.&lt;/li>
+&lt;/ol>
+&lt;div id="0" class="container code">
+Rendering 0 diagramm...
+&lt;/div>
+&lt;script>
+renderKrokiImage("@startuml\n!include C4_Context.puml\nHIDE_STEREOTYPE()\n\nPerson(appUser, \u0022App user\u0022, \u0022Пользователь приложения\u0022)\nSystem_Ext(productApp, \u0022Application\u0022, \u0022Приложение продуктовой компании\u0022)\n\nPerson(guideManager, \u0022Guide manager\u0022, \u0022Пользователь системы\u0022)\nSystem(guideSystem, \u0022Guide system\u0022, \u0022Система управления обучением\u0022)\n\n\nRel(appUser, productApp, \u0022Использует\u0022)\nRel(guideManager, guideSystem, \u0022Меняет настройки\u0022)\nRel(productApp, guideSystem, \u0022Получает текущие подсказки\u0022)\n@enduml", document.getElementById("0"))
+&lt;/script>
+&lt;h2 id="функции-сервиса">Функции сервиса&lt;/h2>
+&lt;p>&lt;img src="https://rusinikita.github.io/blog/blog/p/onboarding-management/new_badge.png"
+width="1016"
+height="436"
+srcset="https://rusinikita.github.io/blog/blog/p/onboarding-management/new_badge_hu97383b02c03552c1ea86386e624a4bf0_126114_480x0_resize_box_3.png 480w, https://rusinikita.github.io/blog/blog/p/onboarding-management/new_badge_hu97383b02c03552c1ea86386e624a4bf0_126114_1024x0_resize_box_3.png 1024w"
+loading="lazy"
+alt="Подсказка new и кружочки"
+class="gallery-image"
+data-flex-grow="233"
+data-flex-basis="559px"
+>&lt;/p>
+&lt;h3 id="пользователь">Пользователь&lt;/h3>
+&lt;ol>
+&lt;li>Пользователю показываются
+&lt;ul>
+&lt;li>Красные точки&lt;/li>
+&lt;li>&amp;ldquo;New&amp;rdquo; badges&lt;/li>
+&lt;li>Bubbles&lt;/li>
+&lt;li>Затемнения с текстом и картинкой&lt;/li>
+&lt;li>Сообщения в центре уведомлений&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>Подсказка не видна после того как пользователь взаимодействовал с ней или со связанным с ней интерфейсом приложения&lt;/li>
+&lt;li>Пользователю показываются новые подсказки из следующего шага, когда будут пройдены самые важные подсказки этого шага&lt;/li>
+&lt;li>Шаги и подсказки выбираются в зависимости от группы пользователя&lt;/li>
+&lt;/ol>
+&lt;h3 id="аналитик">Аналитик&lt;/h3>
+&lt;ol>
+&lt;li>Создает подсказки, объединяет их в шаги;&lt;/li>
+&lt;li>Собирает шаги в пути;&lt;/li>
+&lt;li>Создает группы пользователей, определяет какие пользователи в него попадают.&lt;/li>
+&lt;/ol>
+&lt;h3 id="сущности">Сущности&lt;/h3>
+&lt;div class="mermaid code">erDiagram
+User }o--|| Path : has
+User }o--o{ PromptUI : sees
+PromptUI ||--|| Prompt : rendes
+Path ||--o{ Step : contains
+Step ||--o{ Prompt : contains
+Action ||--o{ Prompt : has
+&lt;/div>
+&lt;h3 id="работа-системы">Работа системы&lt;/h3>
+&lt;div class="mermaid code">sequenceDiagram
+Note over User, AppUI: Rendering
+User->>+AppUI: Open screen
+AppUI-->>User: Show screen
+AppUI->>+PathContainer: Give me prompts
+PathContainer->>PathContainer: Finds current step
+PathContainer-->>-AppUI: Current prompts
+AppUI-->>-User: Show prompts
+Note over User, AppUI: Interacting
+User->>AppUI: Use prompted element
+AppUI->>+PathContainer: Action used
+PathContainer->>PathContainer: Set prompt invisible
+PathContainer->>PathContainer: Move to next step
+PathContainer-->>-AppUI: Current prompts
+&lt;/div>
+&lt;h3 id="смена-пути">Смена пути&lt;/h3>
+&lt;div class="mermaid code">gitGraph
+commit id: "Install CameraApp"
+commit id: "Create photo"
+commit id: "Select advanced mode"
+branch advanced
+checkout advanced
+commit id: "Use hand focus"
+commit id: "Subscribe PRO"
+branch pro-subscription
+checkout pro-subscription
+commit id: "Use 360 video"
+commit id: "Use multiphone photo"
+commit id: "Cancel subscription"
+checkout advanced
+merge pro-subscription
+commit id: "Use long exposure"
+&lt;/div>
+&lt;p>Пользователю может быть назначен новый путь обучения, если меняется его ключевое свойство, включая группу AB-теста.&lt;/p>
+&lt;p>Если был выполнен будущий шаг, теперь его нужно пропустить&lt;/p>
+&lt;h2 id="ценности">Ценности&lt;/h2>
+&lt;ul>
+&lt;li>Простота внедрения&lt;/li>
+&lt;li>Отзывчивость&lt;/li>
+&lt;li>Стоимость разработки и масштабирования&lt;/li>
+&lt;/ul>
+&lt;p>Простота внедрения. Как много усилий нужно сделать, чтобы довести подсказки до пользователей.
+Отзывчивость. Как быстро после ключевого действия происходит обновление подсказок или сообщение.&lt;/p>
+&lt;h2 id="system-design">System design&lt;/h2>
+&lt;p>[WIP] Дальше draft&lt;/p>
+&lt;h3 id="nfr">NFR&lt;/h3>
+&lt;ul>
+&lt;li>Users 10^8&lt;/li>
+&lt;li>DAU - 10^6&lt;/li>
+&lt;li>1 path change per day&lt;/li>
+&lt;li>~100 steps per chain&lt;/li>
+&lt;li>~10 move next step for one user per day&lt;/li>
+&lt;/ul>
+&lt;h3 id="дизайн-не-думая">Дизайн не думая&lt;/h3>
+&lt;p>Пытаемся придумать максимально легко внедряемое решение.&lt;/p>
+&lt;ol>
+&lt;li>Wrapper ui элементов. Локальное хранилище.&lt;/li>
+&lt;li>Хранилище подключается к бекенду и получает текущий шаг и обновления по сокету.&lt;/li>
+&lt;li>Бекенд принимает события от основного бекенда через метод или шину сообщений, шину аналитики&lt;/li>
+&lt;/ol>
+&lt;p>Хорошо&lt;/p>
+&lt;ul>
+&lt;li>Простота внедрения для фронтенда (Wrapper ui элементов + синглтон = удобно)&lt;/li>
+&lt;li>Цепочка обновляется сразу&lt;/li>
+&lt;/ul>
+&lt;p>Плохо&lt;/p>
+&lt;ul>
+&lt;li>Сокеты - дорогая инфраструктура&lt;/li>
+&lt;li>Оффлайн не работает, и вообще сокеты не гарантируют мгновенной отзывчивости&lt;/li>
+&lt;/ul>
+&lt;h3 id="дизайн-offline-first">Дизайн offline first&lt;/h3>
+&lt;ol>
+&lt;li>Wrapper ui элементов. Локальное хранилище.&lt;/li>
+&lt;li>Есть запеченная цепочка. Во время работы приложения пытаемся проверить актуальна ли версия цепочки. Загружаем обновления.&lt;/li>
+&lt;li>Больше бекенд не участвует. При совершении ключевых действий, нужно вызывать метод, уведомляющий хранилище.&lt;/li>
+&lt;/ol>
+&lt;p>Для реализации SDUI или вызова триггеров на стороне бекенда нужно прокидывать ключ триггер на фронтенд.&lt;/p>
+&lt;p>Хорошо&lt;/p>
+&lt;ul>
+&lt;li>Простота внедрения&lt;/li>
+&lt;li>Отзывчивость и вообще оффлайн&lt;/li>
+&lt;/ul>
+&lt;p>Плохо&lt;/p>
+&lt;ul>
+&lt;li>Цепочка обновляется спустя какое-то время или никогда (без интернета)&lt;/li>
+&lt;li>Слишком умный клиент - часто будем сталкиваться, что без обновления библиотеки новые функции сервиса не внедрить&lt;/li>
+&lt;/ul>
+&lt;h3 id="пробуем-обновлять-цепочку-сразу-но-без-сокетов">Пробуем обновлять цепочку сразу, но без сокетов&lt;/h3>
+&lt;p>Храним ровную цепочку. На бекенде обрабатываем ветки&lt;/p>
+&lt;ol>
+&lt;li>Почти сразу - пуши. Background process polling fallback (если не доступны google services)&lt;/li>
+&lt;li>Заголовки&lt;/li>
+&lt;/ol>
+&lt;h2 id="development-design">Development design&lt;/h2>
+&lt;h3 id="context">Context&lt;/h3>
+&lt;h3 id="team-design">Team design&lt;/h3>
+&lt;h3 id="roadmap">Roadmap&lt;/h3>
+&lt;p>Flutter first&lt;/p></description></item></channel></rss>
