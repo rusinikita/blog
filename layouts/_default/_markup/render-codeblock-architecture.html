@@ -5,7 +5,7 @@ Rendering {{ $id }} diagramm...
 </div>
 
 <script>
-    renderKrokiImage("@startuml\n!include C4_Context.puml\n{{ .Inner }}\n@enduml", document.getElementById("{{$id}}"))
+    renderKrokiImage("@startuml\n!include C4_Context.puml\n!include C4_Component.puml\n!include C4_Container.puml\nHIDE_STEREOTYPE()\n{{ .Inner }}\n@enduml", document.getElementById("{{$id}}"))
 </script>
 
 {{ .Page.Store.Set "archID" (add $id 1) }}
