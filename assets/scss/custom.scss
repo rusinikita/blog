@@ -4,3 +4,108 @@
     padding: 2px 4px;
     border-radius: var(--tag-border-radius);
 }
+
+// {{< tabs >}}
+.gdoc-tabs {
+  margin: 16px 0;
+
+  border: 1px solid var(--table-border-color);
+  border-radius: 4px;
+
+  overflow: hidden;
+
+  display: flex;
+  flex-wrap: wrap;
+
+  &__label {
+    display: inline-block;
+    padding: 8px 16px;
+    border-bottom: 1px transparent;
+    cursor: pointer;
+  }
+
+  &__content {
+    order: 999; //Move content blocks to the end
+    width: 100%;
+    border-top: 1px solid var(--accent-color-text);
+    padding: 0 16px;
+    display: none;
+  }
+
+  &__control {
+    display: none
+  }
+
+  &__control:checked + &__label {
+    border-bottom: 2px solid var(--accent-color);
+  }
+  &__control:checked + &__label + &__content {
+    display: block;
+  }
+
+  .gdoc-page__anchor {
+    display: none;
+  }
+}
+
+// {{< columns >}}
+.gdoc-columns {
+  margin: 16px 0;
+
+  &--regular > :first-child {
+    flex: 1;
+  }
+
+  &--small > :first-child {
+    flex: 0.35;
+    min-width: 20rem * 0.35;
+  }
+
+  &--large > :first-child {
+    flex: 1.65;
+    min-width: 20rem * 1.65;
+  }
+
+  &__content {
+    flex: 1 1;
+    min-width: 20rem * 0.66;
+    padding: 0;
+  }
+
+  .gdoc-post__anchor {
+    display: none;
+  }
+}
+
+// {{< expand "Label" "icon" >}}
+.gdoc-expand {
+  margin: 16px 0;
+
+  border: 1px solid var(--accent-color);
+  border-radius: 4px;
+
+  overflow: hidden;
+
+  &__head {
+    background: var(--accent-color-lite);
+    padding: 8px 16px;
+    cursor: pointer;
+  }
+
+  &__content {
+    display: none;
+    padding: 0 16px;
+  }
+
+  &__control:checked + &__content {
+    display: block;
+  }
+
+  &__control {
+    display: none;
+  }
+
+  .gdoc-page__anchor {
+    display: none;
+  }
+}
