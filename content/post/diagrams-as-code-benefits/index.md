@@ -76,7 +76,25 @@ You can get all benefits of using version control systems like Git.
 Changes can be tracked, reviewed and merged with conflicts solving.
 Existing continuous integration tools can be used to analyse, check proper code style, enrich and generate documentation pages.
 
-TODO example merge process with git diagram
+```mermaid
+gitGraph
+    commit
+    commit
+    branch new_feature
+    checkout new_feature
+    commit
+    commit
+    checkout main
+    branch new_feature_2
+    checkout new_feature_2
+    commit
+    commit
+    checkout main
+    commit
+    merge new_feature
+    merge new_feature_2
+    commit
+```
 
 ### Customization
 
