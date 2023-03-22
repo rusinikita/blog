@@ -4,11 +4,15 @@
 {{- $size = "regular" }}
 {{- end }}
 
+{{- $columns := len (split .Inner "<--->") }}
+{{- $percent := div 100 $columns }}
 
-<div class="gdoc-columns gdoc-columns--{{ $size }} flex flex-gap flex-mobile-column">
-  {{- range split .Inner "<--->" }}
-  <div class="gdoc-columns__content flex-even">
-    {{ . | $.Page.RenderString | htmlUnescape | safeHTML }}
-  </div>
-  {{- end }}
-</div>
+<table style="table-layout: fixed; width: 100%; border: none; border-collapse: collapse;" >
+  <tr style="border: none;">
+    {{- range split .Inner "<--->" }}
+    <td style="border: none; width:{{ $percent }}%;">
+      {{ . | $.Page.RenderString | htmlUnescape | safeHTML }}
+    </td>
+    {{- end }}
+  </tr>
+</table>

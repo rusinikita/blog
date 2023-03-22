@@ -47,36 +47,6 @@
   }
 }
 
-// {{< columns >}}
-.gdoc-columns {
-  margin: 16px 0;
-
-  &--regular > :first-child {
-    flex: 1;
-  }
-
-  &--small > :first-child {
-    flex: 0.35;
-    min-width: 20rem * 0.35;
-  }
-
-  &--large > :first-child {
-    flex: 1.65;
-    min-width: 20rem * 1.65;
-  }
-
-  &__content {
-    flex: 1 1;
-    min-width: 20rem * 0.66;
-    padding: 0;
-    margin-right: 16px;
-  }
-
-  .gdoc-post__anchor {
-    display: none;
-  }
-}
-
 .expand {
     margin: 16px 0;
     padding: 16px 16px;

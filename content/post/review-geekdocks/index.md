@@ -143,9 +143,7 @@ Compare and list your arguments.
 
 {{< /columns >}}
 
-Show diagram and tabs in two columns. Allow to interact with diagram
-
-TODO check shortcode inside shortcode
+Show diagram and legend in two columns.
 
 {{< columns size="small" >}}
 **Diagram**
