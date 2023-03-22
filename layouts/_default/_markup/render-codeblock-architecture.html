@@ -1,8 +1,8 @@
 {{ $id := int (.Page.Store.Get "archID") }}
 
-<div id="{{$id}}" class="container code">
+<figure id="{{$id}}" class="diagram">
 Rendering {{ $id }} diagramm...
-</div>
+</figure>
 
 <script>
     renderKrokiImage("@startuml\n!include C4_Context.puml\n!include C4_Component.puml\n!include C4_Container.puml\nHIDE_STEREOTYPE()\n{{ .Inner }}\n@enduml", document.getElementById("{{$id}}"))
