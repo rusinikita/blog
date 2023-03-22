@@ -1,9 +1,9 @@
 ---
 title: Static sites for documentation
-description: My thoughts on static site generators and why it's good tool for project documentation
+description: My thoughts on static site generators and why it's a good tool for project documentation
 slug: static-sites
 date: 2023-01-03 00:00:00+0000
-image: cover.jpeg
+image: img.png
 draft: true
 categories:
 - Opinion
@@ -13,35 +13,35 @@ tags:
 - Static sites
 ---
 
-When it comes to creating documentation, there are many apps available. Ones of them is Confluence, Google Docs, and Miro.
-Its has different UI but can be used for transferring knowledge purpose.
+When it comes to creating documentation, there are many apps available. Some of them are Confluence, Google Docs, and Miro.
+They have different UI but can be used for transferring knowledge purpose.
 
 However, there is an old and still popular way of creating documentation using static site generators.
-In this article, we'll explore why static site generators can be better choice for documentation than complex apps.
+In this article, we'll explore why static site generators can be a better choice for documentation than complex apps.
 
 ## Benefits
 
-Let's start from pros.
+Let's start with pros.
 
 ### Better Speed
 
 {{< columns size="small" >}}
 ![sand-clock.png](sand-clock.png)
 <--->
-One of the biggest advantages of using a static site generator for documentation is quick pages loading.
-It's one of the most valuable parts of reader experience.
+Quick page loading is one of the most significant advantages of using a static site generator for documentation.
+It's one of the most valuable parts of the reader experience.
 {{< /columns >}}
 
 
 Static sites are pre-generated and don't rely on a server to generate content on the fly.
-On other side dynamic apps can do many sub-requests to Backend API or database during page loading.
+On another side, dynamic apps can do many sub-requests to Backend API or database during page loading.
 
-Also having already generated files allows to skip page loading by using HTTP cashing mechanism such Modified Since header.
-That makes site even quicker without complex caching infrastructure.
+Also, already generated files allow skipping page loading using HTTP caching mechanisms such as the If-Modified-Since header.
+This makes the site even quicker without complex caching infrastructure.
 
 ### Simple Automation
 
-You can easily automate documentation actualization by writing scripts to generate diagrams and Markdown tables from app source code and information from internal tools api.
+You can easily automate documentation actualization by writing scripts to generate diagrams and Markdown tables from app source code and information from internal tools API.
 
 ```mermaid
 erDiagram
@@ -59,12 +59,12 @@ erDiagram
 
 ### Version control
 
-Often websites generated from markdown files.
-This is just text files, that can be tracked by version control systems like Git.
+Often websites are generated from Markdown files.
+These are just text files that can be tracked by version control systems like Git.
 
-You can rely on services like GitHub and Gitlab and do not worry much about backups, because all can be quickly repaired from sources.
+You can rely on services like GitHub and GitLab and do not worry much about backups because all can be quickly repaired from sources.
 
-Also, you will get ability to work separately and merge changes ensuring that all latest work saved. 
+Also, you can work separately and merge changes, ensuring that all the latest work is saved. 
 
 ```mermaid
 gitGraph
@@ -88,80 +88,88 @@ gitGraph
 
 ### High Customization
 
-Static sites generators have a variety of open source themes for choosing and each of them has customization settings. 
+Static site generators have a variety of open-source themes to choose from, and each of them has customization settings. 
 That's why it's easy to apply your company's UI style and extend a site with tools you are interested in.
 
 ![](app_interface.jpeg)
 
-For example this site theme. It hasn't diagrams and tabs out of the box, but it was easy to add it with no css knowledge.
+For example, this site theme. It hasn't had diagrams and tabs out of the box, but adding it with no CSS knowledge was easy.
 
-### No licence fees
+### No license fees
 
-Many popular static site generators like Jekyll, Hugo, and Gatsby are open-source and can be used without any licensing fees.
-You are paying only for your sites web server.
-Confluence, gitbook, miro on other side has expensive tariffs that charges depending on members count.
+Many popular static site generators, such as Jekyll, Hugo, and Gatsby, are open-source and can be used without licensing fees.
+You pay only for your site's web server.
+On the other side, Confluence, Gitbook, and Miro have expensive tariffs that charge depending on the members' count.
 
 ![gitbook.com/pricing](pricing.png)
 
 ## Downsides
 
-There is some cons.
+There are several cons.
 
 ### Infrastructure required
 
-Running your own static site much cheaper than SaaS documentation.
-But it requires development time, web server and maintenance.
+Running your own static site is much cheaper than SaaS documentation.
+However, it requires development time, web server, and maintenance.
 
-However, many static site generators offer easy deployment options, 
-and there are also many third-party services like Netlify, Versel, Gitlab and GitHub Pages that can help simplify this process.
+Many static site generators offer easy deployment options, 
+and many third-party services like Netlify, Versel, Gitlab, and GitHub Pages 
+can help simplify this process.
 
 Also, you can use cloud services such as S3 (or Object Storage) almost for free without programming.
-See my guide of creating documentation with team members access control.
+
+[//]: # (TODO See my guide to creating documentation with team members' access control.)
 
 [//]: # (TODO create an article about minimal setup. Basic auth, uploading through S3 UI &#40;mini io + caddy / S3 + basic auth&#41;)
 [//]: # (TODO add guide link)
 
 ### No WYSIWYG editor out of the box
 
-WYSIWYG (What You See is What You Get) is editor UI when you can review how website page will look.
+WYSIWYG (What You See is What You Get) is an editor UI where you can review how the website page will look.
 
 ![DecapCMS WYSIWYG web editor](wyswyg.png)
 
-But generators has not this out of the box. 
-Static sites generators main goal is creating website files from text files such as markdown.
+But generators don't have this out of the box.
+The main goal of static site generators is creating website files from text files such as Markdown.
 
-If you need web editor interface. You need to chose and integrate it.
-There is CMS specialized in editing markdown files content if git repositories.
-For example [tinaCMS](https://tina.io/) or [DecapCMS](https://decapcms.org/).
+If you need a web editor interface, you need to choose and integrate it.
+There is CMS specialized in editing Markdown files content in git repositories.
+For example, [tinaCMS](https://tina.io/) or [DecapCMS](https://decapcms.org/).
 
-By the way, I don't recommend you to do this. There is better alternative, in my opinion. 
+By the way, I don't recommend you to do this. There is better alternative.
 
-For users that need only markdown functions like headers, tables or even diagrams.
-It easy to use Gitlab or GitHub integrated editor that has preview.
+#### Common users
+
+Users needing markdown functions such as headers, tables, 
+or diagrams can easily use the integrated editor in GitLab or GitHub, 
+which includes a preview feature.
+As you can see, the preview also supports diagrams.
 
 ![](github-edit-1.png)
 ![](github-edit-2.png)
 
-For advanced users. Popular IDE already has plugins able to visualize markdown and diagrams.
-This is enough, and even more productive because of rich project navigation and text editor functions.
+#### Advanced users
+
+Users who need to edit templates can benefit from popular IDEs that have plugins capable of visualizing Markdown and diagrams.
+This approach is more productive due to the rich project navigation and text editor functions available.
 
 ![GoLand IDE, solarized dark theme, markdown and mermaid plugin](IDE.png)
 
-### No likes, subscription and comments
+### No likes, subscription, and comments
 
-Common. Does anybody use them? Is some process rely on it? Not, mostly.
+Common. Does anybody use it? Is some process rely on it? Not, mostly.
 
-Any important change requires real time presentation speech or at least mail or messaging announcement.
+Any important change requires a real-time presentation speech or at least a mail or messaging announcement.
 Or it will be 100% missed. 
 
 ## Conclusion
 
-Integration of static sites generator in your knowledge management process has few struggle (затратных, фрустрирующих, непонятных) moments.
-You need to create your own infrastructure and educate editors how to use it.
+Integration of a static site generator in your knowledge management process has a few struggles.
+You need to create your own infrastructure and educate editors on using it.
 
-But they offer you best reader experience, customization, automation and low budget (низкие затраты) at any scale.
+But they offer you the best reader experience, customization, automation, and low costs at any scale.
 
-I'd like to recommend this solution for any organization.
+I want to recommend this solution to any organization.
 
-- For a small developer teams it allows to use same tools and process for code and documentation files at zero cost.
-- For huge companies it allows easily integrate quality control and automation, improve reader experience, and significantly lower costs.
+- For small developer teams, it allows using the same tools and processes for code and documentation files at zero cost.
+- For huge companies, it easily integrates quality control and automation, improves reader experience, and significantly lowers costs.

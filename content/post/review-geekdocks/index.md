@@ -164,12 +164,6 @@ erDiagram
 
 {{< /columns >}}
 
-### Includes
-
-Another underestimated feature. You can paste common content and page previews by one line.
-
-TODO code and screenshot
-
 ### Expand
 
 {{< expand "Click me" >}}
