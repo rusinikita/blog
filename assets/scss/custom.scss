@@ -77,35 +77,10 @@
   }
 }
 
-// {{< expand "Label" "icon" >}}
-.gdoc-expand {
-  margin: 16px 0;
+.expand {
+    margin: 16px 0;
+    padding: 16px 16px;
 
-  border: 1px solid var(--accent-color);
-  border-radius: 4px;
-
-  overflow: hidden;
-
-  &__head {
-    background: var(--accent-color-lite);
-    padding: 8px 16px;
-    cursor: pointer;
-  }
-
-  &__content {
-    display: none;
-    padding: 0 16px;
-  }
-
-  &__control:checked + &__content {
-    display: block;
-  }
-
-  &__control {
-    display: none;
-  }
-
-  .gdoc-page__anchor {
-    display: none;
-  }
+    border: 1px solid var(--accent-color);
+    border-radius: 4px;
 }
