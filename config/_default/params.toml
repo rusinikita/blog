@@ -63,7 +63,7 @@ local = false
 src = ""
 
 [colorScheme]
-toggle = false
+toggle = true
 default = "auto"
 
 [imageProcessing.cover]

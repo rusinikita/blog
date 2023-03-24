@@ -25,13 +25,8 @@ Let's start with pros.
 
 ### Better Speed
 
-{{< columns size="small" >}}
-![sand-clock.png](sand-clock.png)
-<--->
 Quick page loading is one of the most significant advantages of using a static site generator for documentation.
 It's one of the most valuable parts of the reader experience.
-{{< /columns >}}
-
 
 Static sites are pre-generated and don't rely on a server to generate content on the fly.
 On another side, dynamic apps can do many sub-requests to Backend API or database during page loading.
@@ -90,8 +85,6 @@ gitGraph
 
 Static site generators have a variety of open-source themes to choose from, and each of them has customization settings. 
 That's why it's easy to apply your company's UI style and extend a site with tools you are interested in.
-
-![](app_interface.jpeg)
 
 For example, this site theme. It hasn't had diagrams and tabs out of the box, but adding it with no CSS knowledge was easy.
 
