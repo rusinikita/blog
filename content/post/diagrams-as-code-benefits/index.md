@@ -2,7 +2,7 @@
 title: Diagrams as code
 description: Benefits of using Mermaid and PlantUML instead of Lucidchart, diagrams.net, and other apps
 slug: diagrams-as-code
-date: 2023-01-03 00:00:00+0000
+date: 2023-03-02 10:00:00+0000
 image: img2.png
 draft: true
 categories:

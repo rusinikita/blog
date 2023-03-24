@@ -2,7 +2,7 @@
 title: Static sites for documentation
 description: My thoughts on static site generators and why it's a good tool for project documentation
 slug: static-sites
-date: 2023-01-03 00:00:00+0000
+date: 2023-03-01 10:00:00+0000
 image: img.png
 draft: true
 categories:
