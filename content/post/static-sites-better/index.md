@@ -86,7 +86,7 @@ gitGraph
 Static site generators have a variety of open-source themes to choose from, and each of them has customization settings. 
 That's why it's easy to apply your company's UI style and extend a site with tools you are interested in.
 
-For example, this site theme. It hasn't had diagrams and tabs out of the box, but adding it with no CSS knowledge was easy.
+For example, this site theme. It doesn't have diagrams and tabs out of the box, but adding it with no CSS knowledge was easy.
 
 ### No license fees
 
@@ -129,7 +129,7 @@ If you need a web editor interface, you need to choose and integrate it.
 There is CMS specialized in editing Markdown files content in git repositories.
 For example, [tinaCMS](https://tina.io/) or [DecapCMS](https://decapcms.org/).
 
-By the way, I don't recommend you to do this. There is better alternative.
+By the way, I don't recommend you to do this. There is a better alternative.
 
 #### Common users
 
