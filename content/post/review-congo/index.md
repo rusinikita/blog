@@ -88,6 +88,20 @@ You can make strong accent on important details with alerts.
 
 ![Alerts](alerts.png)
 
+### Tailwind CSS
+
+Congo created with Tailwind CSS.
+That allows you to easily customize color scheme and some elements without CSS knowledge.
+
+Just follow [instructions](https://jpanther.github.io/congo/docs/advanced-customisation/#colour-schemes).
+
+### Analytics
+
+That's easy to add analytics for your personal blog.
+Just by [adding file](https://jpanther.github.io/congo/docs/partials/#custom-analytics-providers) with one line of html.
+
+I'd like to recommend you free and privacy focused [GoatCounter](https://www.goatcounter.com/). Just follow [instructions](https://www.goatcounter.com/help/start).
+
 ## Conclusion
 
 As you can see this theme has beautiful design and tools for efficient knowledge sharing.
