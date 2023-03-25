@@ -18,13 +18,13 @@ Diagrams are a powerful tool for visualizing complex systems and processes.
 They can help understand important information quickly and clearly.
 
 However, creating diagrams can be time-consuming and tedious. 
-You need to spend hours in diagramming app like Lucidchart or diagrams.net.
+You have to spend hours in the diagramming app such as Lucidchart or diagrams.net.
 
 This is where diagrams as code come in.
 
 ## Diagrams as code
 
-Diagrams as code, as the name suggests, involve writing code to generate diagram images or HTML automatically.
+As the name suggests, diagrams as code involve writing code to generate diagram images or HTML automatically.
 The most popular and mature tools for that are PlantUML and Mermaid.
 
 ### Example
@@ -57,13 +57,11 @@ flowchart TD
 
 Diagrams as code have several benefits over traditional diagramming apps, including:
 
-### Time saving
+### Time-saving
 
 A most important benefit of diagrams as code is that they can save time when editing existing diagrams. 
 
-Since diagrams are defined as code, 
-changes can be made quickly and easily 
-without the need to manually adjust the layout or formatting.
+Since diagrams are defined as code, changes can be made quickly and easily without manually adjusting the layout or formatting.
 
 #### Example
 
@@ -120,8 +118,7 @@ sequenceDiagram
 
 ### Automation
 
-The structure of diagram code is simple, 
-which allows for the automation of the diagram creation process.
+The structure of a diagram code is simple and allows for the automation of the diagram creation process.
 
 There is a variety of tools for generating diagrams from database structures, 
 OpenAPI specifications, and code.
@@ -138,7 +135,7 @@ System tool examples:
 ### Version control
 
 You can get all the benefits of using Git, such as:
-- Storing diagram data in GitHub-like services with all changes history
+- Storing diagram data in GitHub-like services with all changes in history;
 - Tracking, reviewing, and merging changes with conflict resolution.
 
 ```mermaid
@@ -166,7 +163,7 @@ enrich, and generate documentation pages.
 
 ### Customization
 
-Diagram as code tools have many existing themes and settings that can be used for style customization.
+Diagrams as code tools have many existing themes and settings that can be used for style customization.
 
 ```mermaid
 %%{init: {'theme':'forest'}}%%
@@ -200,7 +197,7 @@ sequenceDiagram
 
 ### Open source
 
-Diagram as code tools are open-source and free to use.
+Diagrams as code tools are open-source and free to use.
 You own your data.
 
 ## Downsides
@@ -223,7 +220,7 @@ If that happens, you need to use LAYOUT commands to correct the generator.
 
 ### Mermaid
 
-Beautiful and popular tool for popular diagrams. JavaScript baset. 
+A beautiful and popular tool for popular diagrams. JavaScript based.
 
 - [Easy docs](https://mermaid.js.org/intro/)
 - [Playground](https://mermaid.live/) - you can share diagrams by link and save drafts in browser storage
@@ -234,7 +231,7 @@ PlantUML may be considered an old-school tool,
 but it is still irreplaceable for some diagrams, 
 such as [C4 architecture](https://c4model.com/).
 
-- [Old fation docs](https://plantuml.com/)
+- [Old fashion docs](https://plantuml.com/)
 - [Playground](https://www.plantuml.com/plantuml/uml/)
 
 ### Kroki
@@ -257,6 +254,6 @@ With a little learning time, you can efficiently:
 - Get diagrams automatically from code or system configuration.
 
 As a professional software developer, 
-I prefer to use PlantUML or Mermaid even in the early design stages. 
+I prefer to use PlantUML or Mermaid, even in the early design stages. 
 
-That allows me to quickly iterate the design by copying the current draft and making changes to it.
+That allows me to quickly iterate the design by copying and making changes to the current draft.
