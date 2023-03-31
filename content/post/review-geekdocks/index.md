@@ -4,7 +4,7 @@ description: Review of the main theme features that can significantly improve yo
 slug: hugo-geekdocs-theme
 date: 2023-03-03 10:00:00+0000
 image: img.png
-draft: true
+draft: false
 categories:
 - Review
 tags:

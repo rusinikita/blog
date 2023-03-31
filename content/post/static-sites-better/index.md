@@ -4,7 +4,7 @@ description: My thoughts on static site generators and why it's a good tool for 
 slug: static-sites
 date: 2023-03-01 10:00:00+0000
 image: img.png
-draft: true
+draft: false
 categories:
 - Opinion
 tags:

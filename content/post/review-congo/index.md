@@ -1,14 +1,14 @@
 ---
-title: Congo good theme for analytics, programmers and company blog.
-description: Review of main theme features than useful for tech articles
+title: Start your blog with Congo
+description: Useful theme features to help programmers, analysts, and QA share knowledge
 slug: hugo-congo-theme
 date: 2023-03-04 10:00:00+0000
 image: img.png
-draft: true
+draft: false
 categories:
 - Review
 tags:
-- Docs
+- Blog
 - Tools
 - Themes
 - Static sites
