@@ -5,7 +5,7 @@ menu:
     weight: 4
     params:
       icon: candy
-
+image: img.png
 links:
 - title: Telegram group
   description: Discussion group for those who are interested
@@ -15,11 +15,30 @@ links:
 comments: false
 ---
 
-# Teamsites - documentation hosting
+# I started to build Teamsites
 
 Teamsites is an easy way to host, protect and share your site.
 
 Teamsites turns Hugo, MkDocs, Gatsby, and other static site generators into superior Confluence alternative.
+
+## Context
+
+I wrote a few articles about the good sides of the usage [static site generators]({{< ref "/post/static-sites-better" >}}) and [diagram as code tools]({{< ref "/post/diagrams-as-code-benefits" >}}).
+
+Popular documentation tools like Confluence and Notion are too complicated.
+They have a lot of features, but everybody is missing something or paying for unused.
+
+On the other side, static sites are simple, fast, powerful and customizable.
+And you will have the best offline text editing experience using IDE.
+
+## Static sites for everyone
+
+A lot of developers use tools like MkDocs for public and private documentation.
+
+But static site generators are not only for programmers.
+*Anyone can easily create content in Markdown files* and generate beautiful and functional websites for free.
+
+![My blog files screenshot](markdown.png)
 
 ## What can you make with Teamsites?
 
@@ -121,22 +140,44 @@ Key abilities for teams and individual creators.
 
 {{</expand>}}
 
-## Why is it useful?
+```mermaid
+flowchart LR
+    blogger(fa:fa-user Blogger)
+    anal(fa:fa-user System analytic)
 
-I wrote a few articles about the good sides of the usage static site generators and diagram as code tools.
+    subgraph Teamsites
+        subgraph Hosting
+            blog[Public Blog]
+            doc[Internal Documentation]
+        end
+        
+        
+        guard["fa:fa-lock Auth Gateway
+        
+        Closes private sites 
+        behind login wall"]
 
-Popular documentation tools like Confluence and Notion are too complicated.
-They have a lot of features, but everybody is missing something or paying for unused.
+        stat["fa:fa-chart-column Analytics
+        
+        Stores view counters"]
+    end
 
-On the other side, static sites are simple, fast, powerful and customizable.
-And you will have the best offline text editing experience using IDE.
+    blogger -- publish --> blog
+    anal -- publish --> doc
 
-A lot of developers use tools like MkDocs for public and private documentation.
-But static site generators are not only for programmers.
+    reader(fa:fa-user Blog reader)
+    teammate(fa:fa-user Analytic temmate)
 
-Anyone can easily create content in Markdown files and generate beautiful and functional websites for free.
+    blog -- allowed --> reader
+    doc -- not allowed --> reader
 
-So I started to build a platform that:
+    blog -- allowed --> teammate
+    doc -- allowed --> teammate
+```
+
+## Conclusion
+
+I started to build a platform that:
 
 - Allows starting using static sites;
 - Provides few features that are hard to create with static sites only (statistics and access control);
@@ -144,4 +185,4 @@ So I started to build a platform that:
 
 ## If you are interested
 
-Let's talk then. Join [this telegram group](https://t.me/+ZxMYEaHJU_kyZGZi) and get an early access.
+Let's talk then. Join [this telegram group](https://t.me/+ZxMYEaHJU_kyZGZi) to see a demo and get an early access.
