@@ -23,10 +23,10 @@ Teamsites turns Hugo, MkDocs, Gatsby, and other static site generators into supe
 
 ## Context
 
-I wrote a few articles about the good sides of the usage [static site generators]({{< ref "/post/static-sites-better" >}}) and [diagram as code tools]({{< ref "/post/diagrams-as-code-benefits" >}}).
+I wrote a few articles about the advatages of the usage [static site generators]({{< ref "/post/static-sites-better" >}}) and [diagram as code tools]({{< ref "/post/diagrams-as-code-benefits" >}}).
 
 Popular documentation tools like Confluence and Notion are too complicated.
-They have a lot of features, but everybody is missing something or paying for unused.
+They have a lot of features, but many users are missing something or paying for unused functionality.
 
 On the other side, static sites are simple, fast, powerful and customizable.
 And you will have the best offline text editing experience using IDE.
