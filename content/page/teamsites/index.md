@@ -17,23 +17,23 @@ comments: false
 
 # Teamsites - documentation hosting
 
-Teamsites it's an easy way to host, protect and share your site.
+Teamsites is an easy way to host, protect and share your site.
 
-Teamsites turns Hugo, MkDocs, Gatsby and other static site generators into superior Confluence alternative.
+Teamsites turns Hugo, MkDocs, Gatsby, and other static site generators into superior Confluence alternative.
 
-## What you can make with teamsites?
+## What can you make with Teamsites?
 
-You can use variety of [static site generators](https://jamstack.org/generators/) and themes.
+You can use a variety of [static site generators](https://jamstack.org/generators/) and themes.
 You can start without knowing Git or programming language.
-I will help you choose best starting tool.
+I will help you choose the best starting tool.
 
 {{< tabs "can_make" >}}
 {{< tab "Personal blog" >}}
 
-## Share your ideas with publicly available personal blog
+## Share your ideas with a publicly available personal blog
 
-- Choose domain name and upload site files in few clicks;
-- Don't worry about git and hosting. Focus on content;
+- Choose a domain name and upload site files in a few clicks;
+- Don't worry about Git and hosting. Focus on content;
 - I will help you to start and move to free GitHub Pages and Netlify.
 
 ![Nikita Rusin personal blog](can_do_personal_blog.png)
@@ -42,13 +42,13 @@ I will help you choose best starting tool.
 
 ## Keep your documentation secure
 
-Create documentation site only for your teammates:
+Create a documentation site only for your teammates:
 
-1. Generate documentation website from markdown files;
+1. Generate documentation website from Markdown files;
 2. Host it privately;
 3. Invite your teammates;
 4. Enjoy better reader and editor UX than Confluence can provide;
-5. View page reading statistic.
+5. View pageview stats.
 
 ![Geekdocs Hugo theme](can_do_documentation.png)
 {{< /tab >}}
@@ -56,11 +56,11 @@ Create documentation site only for your teammates:
 
 ## Secure share news feed
 
-Create private blog for company or closed community:
+Create a private blog for a company or closed community:
 
-1. Generate website from markdown files;
-2. Host it privately and share invite link;
-3. View page reading statistic.
+1. Generate a website from Markdown files;
+2. Host it privately and share the invite link;
+3. View pageview stats.
 
 ![Blist Hugo theme](can_do_company_blog.png)
 {{< /tab >}}
@@ -68,12 +68,12 @@ Create private blog for company or closed community:
 
 ## Share dev builds and tools
 
-You can upload site files by hands or use CI:
+You can upload site files manually or using CI:
 
 1. Dev builds;
 2. storybook.js interactive docs;
-3. Share review link to customer;
-4. View downloading statistic.
+3. Share review link to a customer;
+4. View download statistics.
 
 ![storybook.js docs](can_do_dev_builds.png)
 {{< /tab >}}
@@ -85,13 +85,13 @@ Key abilities for teams and individual creators.
 
 {{<expand "Beginner friendly upload">}}
 
-- Just choose files folder. You don't need GitHub account;
-- Start small. Our tutorials will help you to set up generator, theme and website analytics;
+- Choose the files folder. You don't need a GitHub account;
+- Start small. Our tutorials will help you to set up a generator, theme and website analytics;
 - Let's create your site.
   {{</expand>}}
   {{<expand "Access control">}}
-- Make your sites private without line of code;
-- Create team and add teammates and sites;
+- Make your sites private without a line of code;
+- Create a team and add teammates and sites;
 - Simple team management: invite links, access expiration, role changing, team transfer.
 
 [//]: # (TODO login screenshot)
@@ -108,40 +108,40 @@ Key abilities for teams and individual creators.
 - See site upload and views from your teammates.
   {{</expand>}}
   {{<expand "Per site share links">}}
-- Allow external people see your private site;
-- Share your private site by link with expiration time;
+- Allow external people to see your private site;
+- Share your private site by time-limited link;
 - See link usage statistics.
 
 [//]: # (TODO create link screenshot)
 {{</expand>}}
 {{<expand "No vendor lock and customization">}}
 
-- No vendor-lock and warranties. You own your pages;
+- No vendor lock and warranties. You own your pages;
 - Use open-source tools to host your knowledge base.
 
 {{</expand>}}
 
 ## Why is it useful?
 
-I wrote few articles about good sides of usage static site generators and diagram as code tools.
+I wrote a few articles about the good sides of the usage static site generators and diagram as code tools.
 
-I think that popular documentation tools like Confluence and Notion too complicated.
-They have a lot of features, but everybody missing something or paying for unused.
+Popular documentation tools like Confluence and Notion are too complicated.
+They have a lot of features, but everybody is missing something or paying for unused.
 
-On other side, static sites are simple, fast, powerful out of the box and super customisable.
+On the other side, static sites are simple, fast, powerful and customizable.
 And you will have the best offline text editing experience using IDE.
 
-A lot of developers using tools like MkDocs for public and private documentation.
-But I think that static site generators is not only for programmers.
+A lot of developers use tools like MkDocs for public and private documentation.
+But static site generators are not only for programmers.
 
-Anyone can easily create content in Markdown files and generate beautiful and useful websites for free.
+Anyone can easily create content in Markdown files and generate beautiful and functional websites for free.
 
 So I started to build a platform that:
 
-- Allows start using static sites;
-- Provides few features that hard to create with static sites only (statistics and access control);
-- Provides simple tools to automate a lot of things to keep your documentation up to date and in sync with product.
+- Allows starting using static sites;
+- Provides few features that are hard to create with static sites only (statistics and access control);
+- Provides simple tools to automate many things to keep your documentation updated and in sync with the product.
 
 ## If you are interested
 
-Let's talk then. Join [this telegram group](https://t.me/+ZxMYEaHJU_kyZGZi) and get early access.
+Let's talk then. Join [this telegram group](https://t.me/+ZxMYEaHJU_kyZGZi) and get an early access.
