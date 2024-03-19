@@ -1,5 +1,5 @@
 # Change baseurl before deploy
-baseurl = "http://127.0.0.1:8090"
+baseurl = "https://nikitarusin.com"
 languageCode = "en-us"
 paginate = 5
 title = "Nikita Rusin"
