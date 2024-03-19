@@ -78,6 +78,23 @@
             <input type="number" required x-model.number="sizeBytes" step="100" min="50"
                    placeholder="Enter size in bytes"/>
         </label>
+        <details>
+            <summary role="button" class="outline secondary" style="text-align: right">Warning</summary>
+
+            <p>
+                Be careful with cases, when your service integrates into existed system.<br>
+                <small>For example, video into airbnb room page (`video` entity inside `room` entity)</small>
+            </p>
+
+            <p>Do not go straight to estimation. Describe system boundaries.</p>
+
+            Your questions:
+            <ul>
+                <li>Which part of all pages is expected to be with video's?</li>
+                <li>Which services I need to extend to add my entity to search, show and edit?</li>
+                <li>Can I add columns/fields to existed database?</li>
+            </ul>
+        </details>
     </article>
     <article>
         <hgroup>
