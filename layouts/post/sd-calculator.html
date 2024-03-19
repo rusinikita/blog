@@ -1,0 +1,264 @@
+<html lang="en">
+<head>
+    <link
+            rel="stylesheet"
+            href="https://cdn.jsdelivr.net/npm/@picocss/pico@2/css/pico.violet.min.css"
+    />
+    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+    <meta charset="UTF-8">
+    <meta name="color-scheme" content="light dark"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    {{ partial "head/opengraph/provider/base" . }}
+    {{ partial "head/opengraph/provider/twitter" . }}
+
+    <title>Back-of-the-envelope Estimation</title>
+</head>
+<body>
+
+<header class="container">
+    <nav>
+        <ul>
+            <li><strong>© 2022 - 2024 <a href="/">Nikita Rusin</a> Architect Utils</strong></li>
+        </ul>
+        <ul>
+            <li><a href="/p/diagrams-as-code/">Diagrams</a></li>
+        </ul>
+    </nav>
+    <hgroup>
+        <h2>System design calculations</h2>
+        <p>
+            Back-of-the-envelope Estimation cheat-sheet
+            <br><br>
+            This interactive article helps to remind or rewind key components of estimation part in system design
+            process.
+<!--            <br><br>-->
+<!--            If you find it useful, please, <a target="_blank" href="https://github.com/rusinikita/architect-utils">support-->
+<!--            project with GitHub star</a>.-->
+        </p>
+    </hgroup>
+
+    <details>
+        <summary role="button" class="outline secondary" style="text-align: right">Details</summary>
+
+        <h4>Components:</h4>
+        <ol>
+            <li>Parameters for basic and advanced calculations</li>
+            <li>Design recommendations based on calculation result</li>
+            <li>
+                Scientific calculator links that simplifies unit conversions
+                <ul>
+                    <li>bytes -> GB</li>
+                    <li>RPM * KB * year -> GB</li>
+                    <li>etc</li>
+                </ul>
+            </li>
+        </ol>
+
+        <h4>Numbat</h4>
+
+        <p>Numbat is scientific calculator with command line interface, simple unit conversion and web version.</p>
+        <p>Alternative is calculation by pen using scientific notation or powers of 2.</p>
+        <a href="https://github.com/sharkdp/numbat" target="_blank">Support Numbat project with GitHub star</a>
+
+        <h4>Questions</h4>
+        <a>Please, use <a>project discussions</a> for any questions adn feedback.</a>
+    </details>
+
+</header>
+
+<main class="container"
+      x-data="{ sizeBytes: 200, dailyActivity: 8, repm: 100000, wepm: 2000, storageDays: 365, dbExtra: 1.5, replication: 1}">
+    <article>
+        <hgroup>
+            <h2>Entity size</h2>
+            <p>Average entity size - base for bitrate and capacity calculation. Sum all fields/columns average size.</p>
+        </hgroup>
+        <label>
+            Size in bytes
+            <input type="number" required x-model.number="sizeBytes" step="100" min="50"
+                   placeholder="Enter size in bytes"/>
+        </label>
+    </article>
+    <article>
+        <hgroup>
+            <h2>User activity</h2>
+            <p>
+                Loading profile. How many entities read and written per minute.
+                <br>
+                Network usage estimation parameters.
+            </p>
+        </hgroup>
+
+        <div class="grid">
+            <label>
+                Entity writes/minute
+                <input type="number" required x-model.number="wepm" step="1000" min="500"
+                       placeholder="Enter entities writes"/>
+            </label>
+            <label>
+                Entity reads/minute
+                <input type="number" required x-model.number="repm" step="1000" min="500"
+                       placeholder="Enter entities reads"/>
+            </label>
+            <label>
+                Activity hours per day
+                <input type="number" required x-model.number="dailyActivity" step="1" min="1" max="24"
+                       placeholder="Enter entities writes"/>
+            </label>
+        </div>
+
+        <small>100К single read RPM + 10K list read RPM (list len 10) = 200K entities per minute</small>
+
+        <footer>
+            <div role="group">
+                <a role="button" class="outline"
+                   x-bind:href="`https://numbat.dev/?q=let+writeRPM+%3D+${wepm}+rpm%0Alet+readRPM+%3D+${repm}+rpm%0Alet+entitySize+%3D+${sizeBytes}+bytes%0Alet+writeChannel+%3D+writeRPM+*+entitySize%0Alet+readChannel+%3D+readRPM+*+entitySize%E2%8F%8EwriteChannel+-%3E+MB%2Fs%E2%8F%8EreadChannel+-%3E+MB%2Fs%E2%8F%8E`"
+                   target="_blank"
+                >
+                    Network usage GB/s
+                </a>
+                <a role="button" class="outline"
+                   x-bind:href="`https://numbat.dev/?q=let+writeRPM+%3D+${wepm}+rpm%0Alet+readRPM+%3D+${repm}+rpm%0Alet+entitySize+%3D+${sizeBytes}+bytes%0Alet+activity+%3D+${dailyActivity}%2F24%0Alet+annualWrite+%3D+writeRPM+*+entitySize+*+activity+*+year%0Alet+annualRead+%3D+readRPM+*+entitySize+*+activity+*+year%E2%8F%8EannualWrite+-%3E+TB%E2%8F%8EannualRead+-%3E+TB%E2%8F%8E`"
+                   target="_blank"
+                >
+                    Annual costs TB
+                </a>
+            </div>
+            <details>
+                <summary role="button" class="outline secondary" style="text-align: right">Details and recommendations
+                </summary>
+
+                <hgroup>
+                    <h3>Advanced</h3>
+                    <p><small>
+                        It is not important calculation for system design interview or average projects.
+                    </small></p>
+                </hgroup>
+                <p>
+                    Number of concurrent connections.
+                    <br>
+                    <small>
+                        Real-time or low-latency applications can have bottleneck problems in number of web-sockets or
+                        database connections.
+                        <br>
+                        Your question is "How many users doing this action at the same moment"
+                    </small>
+                </p>
+                <p>
+                    Peak activity factor.
+                    <br>
+                    <small>
+                        User activity has big peaks, especially in retail and games.
+                        <br>
+                        Peaks can be handled with help of cloud or temporary hardware.
+                    </small>
+                </p>
+                <p>
+                    Protocol factor.
+                    <br>
+                    <small>
+                        Protocols and notation (HTTP, JSON, GRPC, SQL, etc) adds extra size to your data and network
+                        usage.
+                        <br>
+                        GZIP or other compression can compensate that but not 100%.
+                        <br>
+                        If bitrate is important do x2.
+                    </small>
+                </p>
+            </details>
+        </footer>
+    </article>
+    <article>
+        <hgroup>
+            <h2>Storage capacity</h2>
+            <p>Important parameters to estimate storage billing.</p>
+        </hgroup>
+        <div class="grid">
+            <label>
+                Data storage time in days
+                <input type="number" required x-model.number="storageDays" step="7" min="7"/>
+            </label>
+
+            <label>
+                Indexes and meta factor
+                <input type="number" required x-model.number="dbExtra" step="0.5" min="1.5" max="5"/>
+            </label>
+
+            <label>
+                Replication factor
+                <input type="number" required x-model.number="replication" step="1" min="1" max="5"/>
+            </label>
+        </div>
+        <footer>
+            <div role="group">
+                <a role="button" class="outline"
+                   x-bind:href="`https://numbat.dev/?q=let+writeRPM+%3D+${wepm}+rpm%0Alet+entitySize+%3D+${sizeBytes}+bytes%0Alet+writeChannel+%3D+writeRPM+*+entitySize%0Alet+storageTime+%3D+${storageDays}+days%0Alet+activityPerDay+%3D+${dailyActivity}%2F24%0Alet+rawDataCapacity+%3D+writeChannel+*+activityPerDay+*+storageTime%E2%8F%8ErawDataCapacity+-%3E+GB%E2%8F%8E`"
+                   target="_blank"
+                >
+                    Raw data capacity
+                </a>
+                <a role="button" class="outline"
+                   x-bind:href="`https://numbat.dev/?q=let+writeRPM+%3D+${wepm}+rpm%0Alet+entitySize+%3D+${sizeBytes}+bytes%0Alet+writeChannel+%3D+writeRPM+*+entitySize%0Alet+storageTime+%3D+${storageDays}+days%0Alet+activityPerDay+%3D+${dailyActivity}%2F24%0Alet+rawDataCapacity+%3D+writeChannel+*+activityPerDay+*+storageTime%E2%8F%8ErawDataCapacity+-%3E+GB%E2%8F%8Elet+dbWorkFactor+%3D+${dbExtra}%0Alet+replicationFactor+%3D+${replication}%E2%8F%8ErawDataCapacity+*+dbWorkFactor+*+replicationFactor+-%3E+GB%E2%8F%8E`"
+                   target="_blank"
+                >
+                    Total occupied space
+                </a>
+            </div>
+            <details>
+                <summary role="button" class="outline secondary" style="text-align: right">Details and recommendations
+                </summary>
+
+                <ul>
+                    <li>
+                        <p>Data storage time.</p>
+                        <p>
+                            <small>Many systems not require to store data forever.</small>
+                            <br>
+                            <small>Or "cold storage" can be used.</small>
+                        </p>
+                    </li>
+                    <li>
+                        <p>Indexes and metadata factor.</p>
+                        <p>
+                            <small>Database isn't magic.</small>
+                            <small>
+                                It stores indexes, not deleted yet entities, pages, blocks, trees and logs data.
+                            </small>
+                        </p>
+                        <p><small>Take at least x2 for simple key-value case.</small></p>
+                    </li>
+                    <li>
+                        <p>Replication factor.</p>
+                        <p>
+                            <small>Database is reliable, but it fails sometimes.</small>
+                            <small>Fail recovery takes time.</small>
+                        </p>
+                        <p>
+                            <small>
+                                98+% uptime requirements rely on x2 replication factor (one main and one replica).
+                            </small>
+                            <br>
+                            <small>x3 for 99.9+.</small>
+                        </p>
+                    <li>
+                        <p>Sharding</p>
+                        <small>500+ GB database barely fits into one database and require sharding.</small>
+                    </li>
+                </ul>
+            </details>
+        </footer>
+    </article>
+
+    <footer>
+        {{ if and (.Site.Params.article.license.enabled) (not (eq .Params.license false)) }}
+        <section class="article-copyright">
+            {{ partial "helper/icon" "copyright" }}
+            <span>{{ default .Site.Params.article.license.default .Params.license | markdownify }}</span>
+        </section>
+        {{ end }}
+        {{ partial "footer/custom" . }}
+    </footer>
+</main>
+
+</body>
+</html>
