@@ -1,7 +1,7 @@
 ---
-title: Geekdocs Hugo theme is ten times better than Confluence
+title: Geekdoc Hugo theme is ten times better than Confluence
 description: Review of the main theme features that can significantly improve your team communication
-slug: hugo-geekdocs-theme
+slug: hugo-geekdoc-theme
 date: 2023-03-03 10:00:00+0000
 image: img.png
 draft: false
