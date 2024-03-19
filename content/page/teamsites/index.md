@@ -6,6 +6,7 @@ menu:
     params:
       icon: candy
 image: img.png
+draft: true
 links:
 - title: Telegram group
   description: Discussion group for those who are interested
