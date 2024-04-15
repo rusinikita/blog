@@ -1,0 +1,384 @@
+<html lang="en">
+<head>
+    <link
+            rel="stylesheet"
+            href="https://cdn.jsdelivr.net/npm/@picocss/pico@2/css/pico.violet.min.css"
+    />
+    <meta charset="UTF-8">
+    <meta name="color-scheme" content="light dark"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    {{- $title := partial "data/title" . -}}
+    {{- $title := partial "data/description" . -}}
+    <title>{{ $title }}</title>
+
+    {{ partial "head/opengraph/provider/base" . }}
+    {{ partial "head/opengraph/provider/twitter" . }}
+
+    <script defer type="module">
+        import 'https://cdn.jsdelivr.net/npm/alpinejs@3.13.8/dist/cdn.min.js';
+        import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs';
+
+        let copy = (model) => {
+            navigator.clipboard.writeText(model.code())
+            model.showCopied = 'Copied!'
+            setTimeout(() => { model.showCopied = undefined }, 2000)
+        }
+
+        mermaid.initialize({
+            startOnLoad: false,
+            logLevel: "debug",
+            flowchart: {useMaxWidth: true, htmlLabels: true},
+            theme: (window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches) ? 'dark' : 'default'
+        });
+
+        Alpine.data('layers', () => ({
+            common: {
+                enabled: true,
+                name: 'Entities',
+                childCount: 2
+            },
+            layerLabelsEnabled: true,
+            layers: [
+                {
+                    name: 'Layer1',
+                    childCount: 1
+                },
+                {
+                    name: 'Layer2',
+                    childCount: 2
+                },
+                {
+                    name: 'Layer3',
+                    childCount: 3
+                }
+            ],
+
+            addLayer() {
+                this.layers.push({
+                    name: 'Layer' + (this.layers.length + 1),
+                    childCount: 3
+                })
+            },
+            removeLayer() {
+                this.layers.pop()
+            },
+            entitiesCode() {
+                if (!this.common.enabled) {
+                    return ""
+                }
+
+                let columns = ":4"
+
+                return `
+    doc6\{\{"Entities"\}\}${columns}
+    block:cc${columns}
+        Entity1
+        Entity2
+        Entity3
+    end
+
+    space${columns}`
+            },
+            code() {
+                let columns = this.layerLabelsEnabled ? ":3" : ":4"
+
+                return `block-beta
+    columns 4
+    ${this.entitiesCode()}
+
+    ${this.layerLabelsEnabled ? `controlDoc\{\{"Control flow"\}\}:1` : ""}
+    componentsDoc\{\{"Application components"\}\}${columns}
+    ${this.layers.map((l, i) => `
+    ${this.layerLabelsEnabled ? `doc${i}<["${l.name}"]>(down)` : ""}
+    block:${l.name}${columns}
+        ${[...Array(l.childCount).keys()].map((i) => l.name + "_" + (i + 1)).join(" ")}
+    end
+    `).join('')}`
+            },
+            async diagram() {
+                const {svg} = await mermaid.render('layersDiv', this.code());
+
+                return svg
+            },
+            copy() {
+                copy(this)
+            }
+        }))
+
+
+        Alpine.data('erDiagram', () => ({
+            connectionTypes: [
+                "||--o{",
+                "||--||"
+            ],
+            entities: [
+                {
+                    id: "1",
+                    name: "Entity1",
+                    connectedTo: "",
+                    connectionType: "||--||"
+                },
+                {
+                    id: "2",
+                    name: "Entity2",
+                    connectedTo: "1",
+                    connectionType: "||--||"
+                }
+            ],
+
+            add() {
+                let id = this.entities.length + 1
+
+                this.entities.push({
+                    id: id.toString(),
+                    name: "Entity" + id,
+                    connectedTo: "",
+                    connectionType: "||--||"
+                })
+            },
+            remove() {
+                this.entities.pop()
+            },
+            entityCode(entity) {
+                return `
+    ${entity.name} {
+        id int
+        created_at time
+        updated_at time
+    }`
+            },
+            connectionCode(entity) {
+                if (!entity.connectedTo) {
+                    return ""
+                }
+
+                let connection = this.entities.find((e) => e.id === entity.connectedTo)
+
+                return `${entity.name} ${entity.connectionType} ${connection.name} : connected`
+            },
+            code() {
+                let entitiesCode = this.entities.map((e) => this.entityCode(e)).join("\n")
+                let connectionsCode = this.entities.map((e) => this.connectionCode(e)).filter((s) => s.length !== 0).join("\n")
+
+                return `erDiagram
+    ${entitiesCode}
+
+    ${connectionsCode}
+`
+            },
+            async diagram() {
+                const {svg} = await mermaid.render('erDiv', this.code());
+
+                return svg
+            },
+            copy() {
+                copy(this)
+            }
+        }))
+
+        Alpine.data('c4', () => ({
+            participants: [
+                {
+                    name: "Person",
+                    toMain: true,
+                    isPerson: true
+                }
+            ],
+
+            add() {
+                this.participants.push({
+                    name: "Participant" + this.participants.length,
+                    toMain: true,
+                    isPerson: true
+                })
+            },
+            remove() {
+                this.participants.pop()
+            },
+            participantCode(entity) {
+                if (entity.isPerson) {
+                    return `${entity.name}(("
+        🙎
+        ${entity.name}
+        <small>[Person]
+        Customer of the system
+        </small>
+    "))`
+                }
+
+                return `${entity.name}\{\{"
+        📟
+        ${entity.name}
+        <small>[External system]
+        External delivery system
+        </small>
+    "\}\}`
+            },
+            connectionCode(entity) {
+                let protocol = entity.isPerson ? "web" : "http";
+                let from = entity.toMain ? entity.name : "System";
+                let to  = !entity.toMain ? entity.name : "System";
+
+                return `${from} -. Uses\\n[${protocol}] .-> ${to}`
+            },
+            code() {
+                let participantsCode = this.participants.map((e) => this.participantCode(e)).join("\n\n")
+                let connectionsCode = this.participants.map((e) => this.connectionCode(e)).filter((s) => s.length !== 0).join("\n")
+
+                return `%%{init: {"flowchart": {"defaultRenderer": "elk"\}\} }%%
+flowchart LR
+
+    System("
+        ⠀
+        🚀
+        System
+        <small>⠀⠀⠀⠀⠀⠀[Software system]⠀⠀⠀⠀⠀⠀
+        Do something
+        </small>
+")
+
+    ${participantsCode}
+
+    ${connectionsCode}
+`
+            },
+            async diagram() {
+                const {svg} = await mermaid.render('C4Div', this.code());
+
+                return svg
+            },
+            copy() {
+                copy(this)
+            }
+        }))
+
+    </script>
+</head>
+<body>
+
+<main class="container">
+    <article x-data="c4">
+        <header>
+            <hgroup>
+                <h2>C4 diagrams</h2>
+                <p>Show application context and containers</p>
+            </hgroup>
+        </header>
+        <div role="group">
+            <button @click="add" class="outline">Add participant</button>
+            <button @click="remove" class="outline secondary">Remove participant</button>
+        </div>
+        <h5>Entities:</h5>
+        <div>
+            <template x-for="participant in participants">
+                <div x-transition class="grid">
+                    <input type="text" name="text" placeholder="Participant name" aria-label="Text" x-model="participant.name"/>
+                    <div>
+                        <label>
+                            <input name="person" type="checkbox" role="switch" x-model="participant.isPerson"/>
+                            Person (or external system)
+                        </label>
+                        <label>
+                            <input name="connection" type="checkbox" role="switch" x-model="participant.toMain"/>
+                            Direction to main system
+                        </label>
+                    </div>
+                </div>
+            </template>
+        </div>
+        <pre x-html="await diagram()"></pre>
+        <div>
+            <button @click="copy" x-bind:data-tooltip="showCopied" data-placement="right">Copy code</button>
+        </div>
+        <!--        <pre x-html="code()"></pre>-->
+    </article>
+
+    <article x-data="erDiagram">
+        <header>
+            <hgroup>
+                <h2>Entity relation diagram</h2>
+                <p>Show application entities</p>
+            </hgroup>
+        </header>
+        <div role="group">
+            <button @click="add" class="outline">Add entity</button>
+            <button @click="remove" class="outline secondary">Remove entity</button>
+        </div>
+        <h5>Entities:</h5>
+        <div>
+            <template x-for="entity in entities">
+                <div x-transition class="grid">
+                    <input type="text" name="text" placeholder="Layer name" aria-label="Text" x-model="entity.name"/>
+                    <select type="number" name="connection" aria-label="Connection" x-model="entity.connectionType"
+                            x-show="entity.connectedTo">
+                        <template x-for="conn in connectionTypes">
+                            <option x-text="conn" x-bind:value="conn"
+                                    x-bind:selected="conn === entity.connectionType"></option>
+                        </template>
+                    </select>
+                    <select type="number" aria-label="Connection" x-model="entity.connectedTo">
+                        <option value="">No connection</option>
+                        <template x-for="e in entities" x-model="entity.connectedTo">
+                            <option x-text="e.name" x-bind:value="e.id"
+                                    x-bind:selected="e.id === entity.connectedTo"></option>
+                        </template>
+                    </select>
+                </div>
+            </template>
+        </div>
+        <pre x-html="await diagram()"></pre>
+        <div>
+            <button @click="copy" x-bind:data-tooltip="showCopied" data-placement="right">Copy code</button>
+        </div>
+        <!--        <pre x-html="code()"></pre>-->
+    </article>
+
+    <article x-data="layers">
+        <header>
+            <hgroup>
+                <h2>Application architecture diagram</h2>
+                <p>Show application entities, layers and components structure</p>
+            </hgroup>
+        </header>
+        <div role="group">
+            <div>
+                <label>
+                    <input name="terms" type="checkbox" role="switch" x-model="common.enabled"/>
+                    Entities
+                </label>
+                <label>
+                    <input name="terms" type="checkbox" role="switch" x-model="layerLabelsEnabled"/>
+                    Arrows
+                </label>
+            </div>
+            <button @click="addLayer" class="outline">Add layer</button>
+            <button @click="removeLayer" class="outline secondary">Remove layer</button>
+        </div>
+        <h5>Layer names:</h5>
+        <div class="grid">
+            <template x-for="layer in layers">
+                <div x-transition>
+                    <input type="text" name="text" placeholder="Layer name" aria-label="Text" x-model="layer.name"/>
+                </div>
+            </template>
+        </div>
+        <pre x-html="await diagram()"></pre>
+        <div>
+            <button @click="copy" x-bind:data-tooltip="showCopied" data-placement="right">Copy code</button>
+        </div>
+    </article>
+
+    <footer>
+        {{ if and (.Site.Params.article.license.enabled) (not (eq .Params.license false)) }}
+        <section class="article-copyright">
+            {{ partial "helper/icon" "copyright" }}
+            <span>{{ default .Site.Params.article.license.default .Params.license | markdownify }}</span>
+        </section>
+        {{ end }}
+        {{ partial "footer/custom" . }}
+    </footer>
+</main>
+
+</body>
+</html>

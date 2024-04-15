@@ -11,7 +11,12 @@
     {{ partial "head/opengraph/provider/base" . }}
     {{ partial "head/opengraph/provider/twitter" . }}
 
-    <title>Back-of-the-envelope Estimation</title>
+    {{- $title := partial "data/title" . -}}
+    {{- $title := partial "data/description" . -}}
+    <title>{{ $title }}</title>
+
+    {{ partial "head/opengraph/provider/base" . }}
+    {{ partial "head/opengraph/provider/twitter" . }}
 </head>
 <body>
 
