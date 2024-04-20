@@ -19,10 +19,12 @@
         import 'https://cdn.jsdelivr.net/npm/alpinejs@3.13.8/dist/cdn.min.js';
         import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs';
 
-        let copy = (model) => {
-            navigator.clipboard.writeText(model.code())
+        let copy = (model, code) => {
+            navigator.clipboard.writeText(code)
             model.showCopied = 'Copied!'
-            setTimeout(() => { model.showCopied = undefined }, 2000)
+            setTimeout(() => {
+                model.showCopied = undefined
+            }, 2000)
         }
 
         mermaid.initialize({
@@ -102,7 +104,7 @@
                 return svg
             },
             copy() {
-                copy(this)
+                copy(this, this.code())
             }
         }))
 
@@ -173,7 +175,7 @@
                 return svg
             },
             copy() {
-                copy(this)
+                copy(this, this.code())
             }
         }))
 
@@ -185,6 +187,13 @@
                     isPerson: true
                 }
             ],
+            containers: {
+                hasDatabase: true,
+                hasQueue: false,
+                hasWorker: false,
+                hasProxies: false,
+                hasFrontends: false,
+            },
 
             add() {
                 this.participants.push({
@@ -215,16 +224,16 @@
         </small>
     "\}\}`
             },
-            connectionCode(entity) {
+            connectionCode(entity, mainEntity) {
                 let protocol = entity.isPerson ? "web" : "http";
-                let from = entity.toMain ? entity.name : "System";
-                let to  = !entity.toMain ? entity.name : "System";
+                let from = entity.toMain ? entity.name : mainEntity;
+                let to = !entity.toMain ? entity.name : mainEntity;
 
                 return `${from} -. Uses\\n[${protocol}] .-> ${to}`
             },
             code() {
                 let participantsCode = this.participants.map((e) => this.participantCode(e)).join("\n\n")
-                let connectionsCode = this.participants.map((e) => this.connectionCode(e)).filter((s) => s.length !== 0).join("\n")
+                let connectionsCode = this.participants.map((e) => this.connectionCode(e, "System")).filter((s) => s.length !== 0).join("\n")
 
                 return `%%{init: {"flowchart": {"defaultRenderer": "elk"\}\} }%%
 flowchart LR
@@ -243,14 +252,130 @@ flowchart LR
     ${connectionsCode}
 `
             },
+            containersCode() {
+                let participantsCode = this.participants.map((e) => this.participantCode(e)).join("\n\n")
+                let connectionsCode = this.participants.filter(e => !e.isPerson).map((e) => this.connectionCode(e, "Backend")).filter((s) => s.length !== 0).join("\n")
+                let worker = !this.containers.hasWorker ? "" : `Worker["
+            ⠀
+            🛠
+            Worker
+            <small>⠀⠀⠀⠀⠀⠀[Container: Go]⠀⠀⠀⠀⠀⠀
+            Process orders
+            </small>
+        "]
+`
+                let database = !this.containers.hasDatabase ? "" : `Database[("
+            ⠀
+            🛢
+            Database
+            <small>⠀⠀[Container: PostgreSQL]⠀⠀
+            Stores user data
+            </small>
+        ")]
+`
+                let queue = !this.containers.hasQueue ? "" : `MessageQueue[["
+            ⠀
+            💬
+            Message Queue
+            <small>⠀⠀⠀⠀⠀⠀[Container: Pulsar]⠀⠀⠀⠀⠀⠀
+            Stores worker tasks
+            </small>
+        "]]
+`
+
+                let proxies = !this.containers.hasProxies ? "" : this.participants.filter(e => e.isPerson).flatMap(e => `${e.name}Proxy["
+            ⠀
+            🔒
+            ${e.name}Proxy
+            <small>⠀⠀⠀⠀⠀⠀[Container: Nginx]⠀⠀⠀⠀⠀⠀
+            Authorizes requests from ${e.name}
+            </small>
+        "]`).join("\n")
+                let frontends = !this.containers.hasFrontends ? "" : this.participants.filter(e => e.isPerson).flatMap(e => `${e.name}Frontend("
+            ⠀
+            📱
+            ${e.name}Frontend
+            <small>⠀⠀⠀⠀⠀⠀[Container: JS]⠀⠀⠀⠀⠀⠀
+            Application UI for ${e.name}
+            </small>
+        ")`).join("\n")
+
+                let internalConnections = ""
+                if (this.containers.hasDatabase) {
+                    internalConnections += "Backend -. Uses\\n[SQL] .-> Database\n"
+                    if (this.containers.hasWorker) {
+                        internalConnections += "Worker -. Uses\\n[SQL] .-> Database\n"
+                    }
+                }
+                if (this.containers.hasQueue) {
+                    internalConnections += "Backend -. Uses\\n[Socket] .-> MessageQueue\n"
+                    if (this.containers.hasWorker) {
+                        internalConnections += "Worker -. Uses\\n[Socket] .-> MessageQueue\n"
+                    }
+                }
+                this.participants.filter(e => e.isPerson).forEach(e => {
+                    if (!this.containers.hasProxies && !this.containers.hasFrontends) {
+                        connectionsCode += `\n${e.name} -. Uses\\n[Web] .-> Backend`
+                        return
+                    }
+                    if (this.containers.hasProxies) {
+                        internalConnections += `${e.name}Proxy -. Uses\\n[Http] .-> Backend\n`
+                    }
+                    if (this.containers.hasProxies && !this.containers.hasFrontends) {
+                        connectionsCode += `\n${e.name} -. Uses\\n[Http] .-> ${e.name}Proxy`
+                    }
+                    if (this.containers.hasFrontends) {
+                        connectionsCode += `\n${e.name} -. Uses .-> ${e.name}Frontend`
+                        if (this.containers.hasProxies) {
+                            internalConnections += `${e.name}Frontend -. Uses\\n[Http] .-> ${e.name}Proxy\n`
+                        } else {
+                            internalConnections += `${e.name}Frontend -. Uses\\n[Http] .-> Backend\n`
+                        }
+                    }
+                })
+
+
+                return `%%{init: {"flowchart": {"defaultRenderer": "elk"\}\} }%%
+flowchart LR
+
+    subgraph System
+        ${frontends}
+        ${proxies}
+        Backend("
+            ⠀
+            🚀
+            Backend
+            <small>⠀⠀⠀⠀⠀⠀[Container: Go]⠀⠀⠀⠀⠀⠀
+            Backend application
+            </small>
+        ")
+        ${worker}
+        ${database}
+        ${queue}
+        ${internalConnections}
+    end
+
+    ${participantsCode}
+    ${connectionsCode}
+`
+            },
             async diagram() {
-                const {svg} = await mermaid.render('C4Div', this.code());
+                const {svg} = await mermaid.render('C4L1Div', this.code());
+
+                return svg
+            },
+            async containersDiagram() {
+                const {svg} = await mermaid.render('C4L2Div', this.containersCode());
 
                 return svg
             },
             copy() {
-                copy(this)
+                copy(this, this.code())
+            },
+            copyContainers() {
+                copy(this, this.containersCode())
             }
+
         }))
 
     </script>
@@ -269,11 +394,13 @@ flowchart LR
             <button @click="add" class="outline">Add participant</button>
             <button @click="remove" class="outline secondary">Remove participant</button>
         </div>
-        <h5>Entities:</h5>
+        <h4>Context diagram</h4>
+        <h5>Participants:</h5>
         <div>
             <template x-for="participant in participants">
                 <div x-transition class="grid">
-                    <input type="text" name="text" placeholder="Participant name" aria-label="Text" x-model="participant.name"/>
+                    <input type="text" name="text" placeholder="Participant name" aria-label="Text"
+                           x-model="participant.name"/>
                     <div>
                         <label>
                             <input name="person" type="checkbox" role="switch" x-model="participant.isPerson"/>
@@ -290,6 +417,37 @@ flowchart LR
         <pre x-html="await diagram()"></pre>
         <div>
             <button @click="copy" x-bind:data-tooltip="showCopied" data-placement="right">Copy code</button>
+        </div>
+        <h4>Containers diagram</h4>
+        <div x-transition class="grid">
+            <div>
+                <label>
+                    <input type="checkbox" role="switch" x-model="containers.hasFrontends"/>
+                    Has frontend applications
+                </label>
+                <label>
+                    <input type="checkbox" role="switch" x-model="containers.hasProxies"/>
+                    Has proxies
+                </label>
+            </div>
+            <div>
+                <label>
+                    <input type="checkbox" role="switch" x-model="containers.hasDatabase"/>
+                    Has database
+                </label>
+                <label>
+                    <input type="checkbox" role="switch" x-model="containers.hasQueue"/>
+                    Has queue
+                </label>
+                <label>
+                    <input type="checkbox" role="switch" x-model="containers.hasWorker"/>
+                    Has worker
+                </label>
+            </div>
+        </div>
+        <pre x-html="await containersDiagram()"></pre>
+        <div>
+            <button @click="copyContainers" x-bind:data-tooltip="showCopied" data-placement="right">Copy code</button>
         </div>
         <!--        <pre x-html="code()"></pre>-->
     </article>
