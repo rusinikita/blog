@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en" style="height: 100%; width: 100%;">
+<head>
+    <meta charset="UTF-8">
+    <title>App</title>
+    <link rel="stylesheet" href="/pico.violet.min.css"/>
+    <script src="https://telegram.org/js/telegram-web-app.js"></script>
+
+<body class="container" style="padding: 40px; vertical-align: bottom">
+<img id="cat" src="/cute_cat.svg">
+</body>
+
+<script>
+    window?.Telegram?.WebApp?.expand()
+    window?.Telegram?.WebApp?.ready()
+
+    function ensureDocumentIsScrollable() {
+        const isScrollable =
+            document.documentElement.scrollHeight > window.innerHeight;
+        if (!isScrollable) {
+            document.documentElement.style.setProperty(
+                "height",
+                "calc(100vh + 1px)",
+                "important"
+            );
+        }
+    }
+
+    function preventCollapse() {
+        if (window.scrollY === 0) {
+            window.scrollTo(0, 1);
+        }
+    }
+
+    document.addEventListener("DOMContentLoaded", () => {
+        const el = document.getElementById("cat")
+
+        el.addEventListener("touchstart", () => {
+            preventCollapse()
+        });
+        el.addEventListener("touchend", () => {
+
+        });
+        el.addEventListener("touchcancel", () => {
+
+        });
+        el.addEventListener("touchmove", (event) => {
+            event.preventDefault()
+
+            if (window.scrollY === 0) {
+                window.scrollTo(0, 1);
+            }
+
+            const r = Math.floor(Math.random() * 3)
+
+            if (r > 1) {
+                window?.Telegram?.WebApp?.HapticFeedback?.impactOccurred("soft")
+            } else {
+                window?.Telegram?.WebApp?.HapticFeedback?.impactOccurred("light")
+            }
+        });
+    })
+
+    window.addEventListener("load", ensureDocumentIsScrollable)
+</script>
